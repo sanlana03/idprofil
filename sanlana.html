@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SANLANA | Freedom Syndicate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #05080f;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 123, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 150, 255, 0.05) 0%, transparent 50%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: linear-gradient(145deg, #0b111e 0%, #090d16 100%);
+            border-radius: 32px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(0, 123, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+            animation: cardEntry 0.9s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            text-align: center; /* ⬅️ MEMBUAT SEMUA ISI TENGAH */
+        }
+
+        @keyframes cardEntry {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.96);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 34px;
+            background: linear-gradient(45deg, #007bff, #003366, #00a6ff, #007bff);
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: borderGlow 8s ease infinite;
+            opacity: 0.3;
+            filter: blur(6px);
+        }
+
+        @keyframes borderGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .profile-pic {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 25px;
+            display: block;
+            border: 3px solid rgba(0, 123, 255, 0.7);
+            box-shadow: 0 0 25px rgba(0, 123, 255, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 40px rgba(0, 160, 255, 0.7);
+        }
+
+        .name {
+            font-size: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #ffffff;
+            margin-bottom: 6px;
+            text-shadow: 0 0 15px rgba(0,123,255,0.5);
+            /* sudah di tengah karena container text-align: center */
+        }
+
+        /* Skill badge + keterangan */
+        .skill-badge {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #64b5f6;
+            background: rgba(0, 123, 255, 0.1);
+            padding: 6px 18px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            border: 1px solid rgba(0, 123, 255, 0.3);
+            margin-bottom: 12px;
+        }
+
+        .skill-desc {
+            font-size: 14px;
+            color: #b0c7e0;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            padding: 0 5px;
+            letter-spacing: 0.3px;
+        }
+
+        .services {
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.06);
+            backdrop-filter: blur(2px);
+            text-align: left; /* supaya list tetap rapi di kiri */
+        }
+
+        .services h3 {
+            font-size: 16px;
+            color: #bbdefb;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.5px;
+        }
+
+        .services h3::before {
+            content: "⚡";
+            margin-right: 8px;
+            color: #007bff;
+        }
+
+        .services ul {
+            list-style: none;
+            color: #c5cddb;
+            font-size: 15px;
+        }
+
+        .services li {
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .services li::before {
+            content: "▹";
+            color: #007bff;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* Owner section */
+        .owner-section {
+            margin-bottom: 8px;
+        }
+
+        .owner-btn {
+            display: block;
+            text-align: center;
+            background: #0a1a2f;
+            border: 1px solid #007bff;
+            color: #64b5f6;
+            font-weight: 700;
+            font-size: 17px;
+            letter-spacing: 2px;
+            padding: 15px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 12px rgba(0,123,255,0.2);
+            background: linear-gradient(135deg, #0b1a30, #081221);
+        }
+
+        .owner-btn:hover {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+            box-shadow: 0 0 30px rgba(0,123,255,0.6);
+            transform: translateY(-2px);
+        }
+
+        .owner-btn::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .owner-btn:hover::after {
+            left: 100%;
+        }
+
+        .owner-desc {
+            font-size: 13px;
+            color: #7e94b0;
+            margin-top: -2px;
+            margin-bottom: 25px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* Social media grid */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px 6px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            background: rgba(0, 20, 40, 0.8);
+            border: 1px solid rgba(0, 123, 255, 0.25);
+            transition: all 0.25s ease;
+            backdrop-filter: blur(4px);
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .social-link:hover {
+            background: rgba(0, 123, 255, 0.15);
+            border-color: #007bff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 15px rgba(0,123,255,0.4);
+            color: #ffffff;
+        }
+
+        .icon-fb::before { content: "📘"; margin-right: 4px; }
+        .icon-wa::before { content: "💬"; margin-right: 4px; }
+        .icon-ig::before { content: "📷"; margin-right: 4px; }
+        .icon-tt::before { content: "🎵"; margin-right: 4px; }
+        .icon-tw::before { content: "𝕏"; margin-right: 4px; }
+
+        @media (max-width: 400px) {
+            .social-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Foto Profil -->
+        <img src="https://i.ibb.co/Ps5ML8vL/1767766081367.png" alt="SANLANA" class="profile-pic">
+
+        <!-- Nama (otomatis di tengah karena container text-align center) -->
+        <div class="name">SANLANA</div>
+
+        <!-- Skill badge -->
+        <div class="skill-badge">⚡ TRADE ANALIST</div>
+
+        <!-- KETERANGAN SKILL -->
+        <div class="skill-desc">
+            Ahli dalam analisa teknikal, struktur market, dan manajemen risiko. Membaca pergerakan harga dengan presisi untuk keputusan trading yang optimal.
+        </div>
+
+        <!-- Jasa -->
+        <div class="services">
+            <h3>Menerima Jasa</h3>
+            <ul>
+                <li>Pembuatan Bot</li>
+                <li>Pembuatan Website</li>
+                <li>Pembuatan ID Profil</li>
+            </ul>
+        </div>
+
+        <!-- Owner section -->
+        <div class="owner-section">
+            <a href="https://linktr.ee/freedomsyndicate" target="_blank" class="owner-btn">
+                ⚓ FREEDOM SYNDICATE
+            </a>
+            <!-- KETERANGAN OWNER -->
+            <div class="owner-desc">
+                Official Partner &amp; Under The Banner
+            </div>
+        </div>
+
+        <!-- Sosial Media -->
+        <div class="social-grid">
+            <a href="https://www.facebook.com/share/18RYcaLEhK/" target="_blank" class="social-link icon-fb">Facebook</a>
+            <a href="https://wa.me/601140330260" target="_blank" class="social-link icon-wa">WhatsApp</a>
+            <a href="https://www.instagram.com/sanlana0392" target="_blank" class="social-link icon-ig">Instagram</a>
+            <a href="https://www.tiktok.com/@sanlana0392" target="_blank" class="social-link icon-tt">TikTok</a>
+            <a href="https://x.com/SanLana148379" target="_blank" class="social-link icon-tw">Twitter</a>
+        </div>
+    </div>
+</body>
+</html>
